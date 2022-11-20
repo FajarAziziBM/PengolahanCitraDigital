@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/api-get-data', function(){
+    $client = new Client();
+    $response = $client->request('GET','http://127.0.0.1:5000/api');
+    $status_code = $response->getStatusCode();
+    $body = $response->getBody()->getContents();
+    $data = json_decode($body, true);
+    return $data;
 });
