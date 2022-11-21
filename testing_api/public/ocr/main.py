@@ -1,3 +1,5 @@
+import time
+from datetime import datetime
 import cv2
 import pytesseract
 from pytesseract import Output
@@ -17,8 +19,8 @@ def hello():
 @app.route('/api', methods=['GET'])
 
 def index():
-    # gambar = Getdata()
-    img = cv2.imread('../images/Shoppe_pay.jpeg')
+    gambar = Getdata()
+    img = cv2.imread(gambar)
 
     image = img[175:220, 75:640]
 
@@ -58,7 +60,8 @@ def index():
             if r[2] == 'nomor_transaksi' :
                 output['nomor_transaksi'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text.replace("\n","")
+                text = datetime.strptime( (text.replace("\n","")),"%d %b %Y %H:%M:%S")
+                output['tgl'] = text
             if r[2] == 'nomor_struk' :
                 output['nomor_struk'] = text.replace("\n","")
             if r[2] == 'pengirim' :
@@ -70,7 +73,7 @@ def index():
             if r[2] == 'nama_penerima' :
                 output['nama_penerima'] = text.replace("\n","")
             if r[2] == 'jumlah' :
-                output['jumlah'] = text.replace("\n","")
+                output['jumlah'] = int(((text.replace("\n","")).replace(".","")).replace(",",""))
 
         return jsonify(output)
 
@@ -105,7 +108,8 @@ def index():
             if r[2] == 'tgl' :
                 output['tgl'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text.replace("\n","")
+                text = datetime.strptime( (text.replace("\n","")),"%d %b %Y %H:%M:%S")
+                output['tgl'] = text
             if r[2] == 'no_struk' :
                 output['no_struk'] = text.replace("\n","")
             if r[2] == 'jns_pembelian' :
@@ -115,11 +119,11 @@ def index():
             if r[2] == 'reference' :
                 output['reference'] = text.replace("\n","")
             if r[2] == 'nominal' :
-                output['nominal'] = text.replace("\n","")
+                output['nominal'] = int(((text.replace("\n","")).replace(".","")).replace(",","").replace("Rp",""))
             if r[2] == 'fee' :
-                output['fee'] = text.replace("\n","")
+                output['fee'] = int(((text.replace("\n","")).replace(".","")).replace(",","").replace("Rp",""))
             if r[2] == 'total' :
-                output['total'] = text.replace("\n","")
+                output['total'] = int(((text.replace("\n","")).replace(".","")).replace(",","").replace("Rp",""))
 
         return jsonify(output)
 
@@ -151,7 +155,8 @@ def index():
             if r[2] == 'nomor_transaksi' :
                 output['nomor_transaksi'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text.replace("\n","")
+                text = datetime.strptime( (text.replace("\n","")),"%d %b %Y %H:%M:%S")
+                output['tgl'] = text
             if r[2] == 'nomor_struk' :
                 output['nomor_struk'] = text.replace("\n","")
             if r[2] == 'jenis_pembelian' :
@@ -161,9 +166,9 @@ def index():
             if r[2] == 'nama_pelanggan' :
                 output['nama_pelanggan'] = text.replace("\n","")
             if r[2] == 'nilai_topup' :
-                output['nilai_topup'] = text.replace("\n","")
+                output['nilai_topup'] = int(((text.replace("\n","")).replace(".","")).replace(",","").replace("Rp",""))
             if r[2] == 'total_bayar' :
-                output['total_bayar'] = text.replace("\n","")
+                output['total_bayar'] = int(((text.replace("\n","")).replace(".","")).replace(",","").replace("Rp",""))
 
         return jsonify(output)
 
@@ -197,7 +202,8 @@ def index():
             if r[2] == 'nomor_transaksi' :
                 output['nomor_transaksi'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text.replace("\n","")
+                text = datetime.strptime( (text.replace("\n","")),"%d %b %Y %H:%M:%S")
+                output['tgl'] = text
             if r[2] == 'nomor_struk' :
                 output['nomor_struk'] = text.replace("\n","")
             if r[2] == 'jenis_pembayaran' :
@@ -207,13 +213,13 @@ def index():
             if r[2] == 'nama_costumer' :
                 output['nama_costumer'] = text.replace("\n","")
             if r[2] == 'admin_fee' :
-                output['admin_fee'] = text.replace("\n","")
+                output['admin_fee'] = int(((text.replace("\n","")).replace(".","")).replace(",","").replace("Rp",""))
             if r[2] == 'nominal_topup' :
                 output['nominal_topup'] = text.replace("\n","")
             if r[2] == 'no_reff' :
                 output['no_reff'] = text.replace("\n","")
             if r[2] == 'total_bayar' :
-                output['total_bayar'] = text.replace("\n","")
+                output['total_bayar'] = int(((text.replace("\n","")).replace(".","")).replace(",","").replace("Rp",""))
 
         return jsonify(output)
 
@@ -248,9 +254,8 @@ def index():
             if r[2] == 'no_transaksi' :
                 output['no_transaksi'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text.replace("\n","")
-            if r[2] == 'tgl' :
-                output['tgl'] = text.replace("\n","")
+                text = datetime.strptime( (text.replace("\n","")),"%d %b %Y %H:%M:%S")
+                output['tgl'] = text
             if r[2] == 'no_struk' :
                 output['no_struk'] = text.replace("\n","")
             if r[2] == 'jns_pembelian' :
@@ -260,18 +265,18 @@ def index():
             if r[2] == 'nama' :
                 output['nama'] = text.replace("\n","")
             if r[2] == 'jumlah' :
-                output['jumlah'] = text.replace("\n","")
+                output['jumlah'] = int(((text.replace("\n","")).replace(".","")).replace(",","").replace("Rp",""))
             if r[2] == 'order_id' :
                 output['order_id'] = text.replace("\n","")
             if r[2] == 'transaksi_id' :
                 output['transaksi_id'] = text.replace("\n","")
             if r[2] == 'total' :
-                output['total'] = text.replace("\n","")
+                output['total'] = int(((text.replace("\n","")).replace(".","")).replace(",","").replace("Rp",""))
 
         return jsonify(output)
 
 def Getdata():
-    d = './images/Shoppe_pay.jpeg'
+    d = '../images/Gopay.jpeg'
     return d
 
 app.run()
