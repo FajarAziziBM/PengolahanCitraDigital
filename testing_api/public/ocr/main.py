@@ -50,27 +50,27 @@ def index():
             imgCrop = image[r[0][0]:r[0][1],r[1][0]:r[1][1]]
 
             text = pytesseract.image_to_string(imgCrop)
-
+            
             if r[2] == 'status' :
-                output['status'] = text
+                output['status'] = text.replace("\n","")
             if r[2] == 'nama penerima' :
-                output['nama_penerima'] = text
+                output['nama_penerima'] = text.replace("\n","")
             if r[2] == 'nomor_transaksi' :
-                output['nomor_transaksi'] = text
+                output['nomor_transaksi'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text
+                output['tgl'] = text.replace("\n","")
             if r[2] == 'nomor_struk' :
-                output['nomor_struk'] = text
+                output['nomor_struk'] = text.replace("\n","")
             if r[2] == 'pengirim' :
-                output['pengirim'] = text
+                output['pengirim'] = text.replace("\n","")
             if r[2] == 'no_rekening_tujuan' :
-                output['no_rekening_tujuan'] = text
+                output['no_rekening_tujuan'] = text.replace("\n","")
             if r[2] == 'bank_penerima' :
-                output['bank_penerima'] = text
+                output['bank_penerima'] = text.replace("\n","")
             if r[2] == 'nama_penerima' :
-                output['nama_penerima'] = text
+                output['nama_penerima'] = text.replace("\n","")
             if r[2] == 'jumlah' :
-                output['jumlah'] = text
+                output['jumlah'] = text.replace("\n","")
 
         return jsonify(output)
 
@@ -97,28 +97,29 @@ def index():
             imgCrop = image[r[0][0]:r[0][1],r[1][0]:r[1][1]]
 
             text = pytesseract.image_to_string(imgCrop)
+
             if r[2] == 'status' :
-                output['status'] = text
+                output['status'] = text.replace("\n","")
             if r[2] == 'no_transaksi' :
-                output['no_transaksi'] = text
+                output['no_transaksi'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text
+                output['tgl'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text
+                output['tgl'] = text.replace("\n","")
             if r[2] == 'no_struk' :
-                output['no_struk'] = text
+                output['no_struk'] = text.replace("\n","")
             if r[2] == 'jns_pembelian' :
-                output['jns_pembelian'] = text
+                output['jns_pembelian'] = text.replace("\n","")
             if r[2] == 'no_hp' :
-                output['no_hp'] = text
+                output['no_hp'] = text.replace("\n","")
             if r[2] == 'reference' :
-                output['reference'] = text
+                output['reference'] = text.replace("\n","")
             if r[2] == 'nominal' :
-                output['nominal'] = text
+                output['nominal'] = text.replace("\n","")
             if r[2] == 'fee' :
-                output['fee'] = text
+                output['fee'] = text.replace("\n","")
             if r[2] == 'total' :
-                output['total'] = text
+                output['total'] = text.replace("\n","")
 
         return jsonify(output)
 
@@ -146,23 +147,23 @@ def index():
             text = pytesseract.image_to_string(imgCrop)
 
             if r[2] == 'status' :
-                output['status'] = text
+                output['status'] = text.replace("\n","")
             if r[2] == 'nomor_transaksi' :
-                output['nomor_transaksi'] = text
+                output['nomor_transaksi'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text
+                output['tgl'] = text.replace("\n","")
             if r[2] == 'nomor_struk' :
-                output['nomor_struk'] = text
+                output['nomor_struk'] = text.replace("\n","")
             if r[2] == 'jenis_pembelian' :
-                output['jenis_pembelian'] = text
+                output['jenis_pembelian'] = text.replace("\n","")
             if r[2] == 'no_pelanggan' :
-                output['no_pelanggan'] = text
+                output['no_pelanggan'] = text.replace("\n","")
             if r[2] == 'nama_pelanggan' :
-                output['nama_pelanggan'] = text
+                output['nama_pelanggan'] = text.replace("\n","")
             if r[2] == 'nilai_topup' :
-                output['nilai_topup'] = text
+                output['nilai_topup'] = text.replace("\n","")
             if r[2] == 'total_bayar' :
-                output['total_bayar'] = text
+                output['total_bayar'] = text.replace("\n","")
 
         return jsonify(output)
 
@@ -192,27 +193,27 @@ def index():
             text = pytesseract.image_to_string(imgCrop)
 
             if r[2] == 'status' :
-                output['status'] = text
+                output['status'] = text.replace("\n","")
             if r[2] == 'nomor_transaksi' :
-                output['nomor_transaksi'] = text
+                output['nomor_transaksi'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text
+                output['tgl'] = text.replace("\n","")
             if r[2] == 'nomor_struk' :
-                output['nomor_struk'] = text
+                output['nomor_struk'] = text.replace("\n","")
             if r[2] == 'jenis_pembayaran' :
-                output['jenis_pembayaran'] = text
+                output['jenis_pembayaran'] = text.replace("\n","")
             if r[2] == 'no_handphone' :
-                output['no_handphone'] = text
+                output['no_handphone'] = text.replace("\n","")
             if r[2] == 'nama_costumer' :
-                output['nama_costumer'] = text
+                output['nama_costumer'] = text.replace("\n","")
             if r[2] == 'admin_fee' :
-                output['admin_fee'] = text
+                output['admin_fee'] = text.replace("\n","")
             if r[2] == 'nominal_topup' :
-                output['nominal_topup'] = text
+                output['nominal_topup'] = text.replace("\n","")
             if r[2] == 'no_reff' :
-                output['no_reff'] = text
+                output['no_reff'] = text.replace("\n","")
             if r[2] == 'total_bayar' :
-                output['total_bayar'] = text
+                output['total_bayar'] = text.replace("\n","")
 
         return jsonify(output)
 
@@ -243,29 +244,29 @@ def index():
             # cv2.imshow('img',imgCrop)
             cv2.waitKey(0)
             if r[2] == 'status' :
-                output['status'] = text
+                output['status'] = text.replace("\n","")
             if r[2] == 'no_transaksi' :
-                output['no_transaksi'] = text
+                output['no_transaksi'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text
+                output['tgl'] = text.replace("\n","")
             if r[2] == 'tgl' :
-                output['tgl'] = text
+                output['tgl'] = text.replace("\n","")
             if r[2] == 'no_struk' :
-                output['no_struk'] = text
+                output['no_struk'] = text.replace("\n","")
             if r[2] == 'jns_pembelian' :
-                output['jns_pembelian'] = text
+                output['jns_pembelian'] = text.replace("\n","")
             if r[2] == 'no_hp' :
-                output['no_hp'] = text
+                output['no_hp'] = text.replace("\n","")
             if r[2] == 'nama' :
-                output['nama'] = text
+                output['nama'] = text.replace("\n","")
             if r[2] == 'jumlah' :
-                output['jumlah'] = text
+                output['jumlah'] = text.replace("\n","")
             if r[2] == 'order_id' :
-                output['order_id'] = text
+                output['order_id'] = text.replace("\n","")
             if r[2] == 'transaksi_id' :
-                output['transaksi_id'] = text
+                output['transaksi_id'] = text.replace("\n","")
             if r[2] == 'total' :
-                output['total'] = text
+                output['total'] = text.replace("\n","")
 
         return jsonify(output)
 
