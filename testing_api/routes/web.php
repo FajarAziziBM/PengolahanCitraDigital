@@ -24,5 +24,7 @@ Route::get('/api-get-data', function(){
     $status_code = $response->getStatusCode();
     $body = $response->getBody()->getContents();
     $data = json_decode($body, true);
-    return $data;
+    return view('form', [
+        'data' => $data
+    ]);
 });
