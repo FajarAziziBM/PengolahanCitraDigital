@@ -12,10 +12,6 @@ app = Flask(__name__)
 # If you don't have tesseract executable in your PATH, include the following:
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
-@app.route('/')
-def hello():
-    print('hello')
-
 @app.route('/api', methods=['GET'])
 
 def index():

@@ -23,6 +23,9 @@
                     <input type="text" class="form-control" id="no_transaksi" placeholder="no_transaksi" name="no_transaksi" value="{{ $data['nomor_transaksi'] }}">
                 </div>
                 <div class="mb-3">
+                    @php
+                        $data['tgl'] = date('Y-m-d H:i', strtotime($data['tgl']))
+                    @endphp
                     <label for="exampleFormControlInput1" class="form-label">Tanggal dan Waktu</label>
                     <input type="datetime-local" class="form-control" id="tgl" placeholder="tgl" name="tgl" value="{{ $data['tgl'] }}">
                 </div>

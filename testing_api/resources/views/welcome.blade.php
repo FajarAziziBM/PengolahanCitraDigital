@@ -26,7 +26,7 @@
               Dropdown button
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/api-get-data">Action</a></li>
+              <li><a class="dropdown-item" href="/api-get-data">Get Data struk</a></li>
             </ul>
           </div>
     </body>
