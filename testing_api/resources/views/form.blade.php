@@ -10,10 +10,8 @@
 </head>
 <body>
     <div class="card" style="margin: 10px 200px">
-        <div class="card-header">d
-            Featured
+        <div class="card-header">
         </div>
-        @dd($data)
         <div class="card-body">
             <form action="">
                 <div class="mb-3">
