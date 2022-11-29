@@ -18,9 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/api-get-data', function(){
+Route::get('/api-get-data', function () {
     $client = new Client();
-    $response = $client->request('GET','http://127.0.0.1:5000/api');
+    $response = $client->request('GET', 'http://127.0.0.1:5000/api?image=sesama_bank.jpeg');
     $status_code = $response->getStatusCode();
     $body = $response->getBody()->getContents();
     $data = json_decode($body, true);
