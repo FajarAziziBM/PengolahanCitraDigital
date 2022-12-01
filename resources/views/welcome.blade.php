@@ -27,6 +27,7 @@
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/api-get-data">Get Data struk</a></li>
+              <li><a class="dropdown-item" href="/form">Get Form</a></li>
             </ul>
           </div>
     </body>

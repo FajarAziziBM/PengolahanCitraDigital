@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/form', function () {
+    return view('inputform');
+});
+
 Route::get('/api-get-data', function () {
     $client = new Client();
     $response = $client->request('GET', 'http://127.0.0.1:5000/api?image=sesama_bank.jpeg');

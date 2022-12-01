@@ -4,11 +4,14 @@ import cv2
 import pytesseract
 from pytesseract import Output
 from pytesseract import image_to_string
+from flask_cors import CORS
 
-from flask import Flask, render_template, request, jsonify, json
+from flask import Flask, render_template, request, jsonify, json, make_response
 import sys
 
 app = Flask(__name__)
+cors = CORS(app)
+
 
 # If you don't have tesseract executable in your PATH, include the following:
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -206,8 +209,13 @@ def index():
         return jsonify(output)
 
 
-def Getdata():
-    return '../images/sesama_bank.jpeg'
+@app.route('/getdata', methods=['POST'])
+def test():
+    res = request.data
+    print(res)
+    print('sukses')
+    return jsonify('sukses')
+
 
 
 app.run(debug=True)
