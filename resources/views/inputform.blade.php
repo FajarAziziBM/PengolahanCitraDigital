@@ -53,9 +53,10 @@
                                         $.ajax({
                                             url: "http://127.0.0.1:5000/getdata",
                                             type: "POST",
-                                            data: {
-                                                nama: 'Alvin'
-                                            },
+                                            data: JSON.stringify({
+                                                'nama' : 'Alvin',
+                                                'umur' : 19
+                                            }),
                                             dataType: 'json',
                                             headers: {
                                                 'X-CSRF-TOKEN':'{{ csrf_token() }}',

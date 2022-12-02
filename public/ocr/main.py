@@ -211,10 +211,9 @@ def index():
 
 @app.route('/getdata', methods=['POST'])
 def test():
-    res = request.data
+    res = json.loads(request.data).get('nama')
     print(res)
-    print('sukses')
-    return jsonify('sukses')
+    return jsonify(res)
 
 
 
