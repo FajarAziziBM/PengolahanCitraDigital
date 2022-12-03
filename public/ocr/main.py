@@ -1,10 +1,13 @@
 import time
+import base64
 from datetime import datetime
 import cv2
 import pytesseract
 from pytesseract import Output
 from pytesseract import image_to_string
 from flask_cors import CORS
+import PIL.Image as Image
+import io
 
 from flask import Flask, render_template, request, jsonify, json, make_response
 import sys
@@ -211,10 +214,12 @@ def index():
 
 @app.route('/getdata', methods=['POST'])
 def test():
-    res = json.loads(request.data).get('nama')
-    print(res)
-    return jsonify(res)
-
-
+    res = json.loads(request.data).get('gambar')
+    res = res.split("base64,")
+    gambar = base64.b64decode(res[1])
+    img = Image.open(io.BytesIO(gambar))
+    text = pytesseract.image_to_string(img)
+    print(text)
+    return jsonify(res[1])
 
 app.run(debug=True)
