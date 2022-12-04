@@ -20,14 +20,17 @@ cors = CORS(app)
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
-@app.route('/api', methods=['GET', 'POST'])
-def index():
-    gambar = f"public/images/{request.args.get('image')}"
-    img = cv2.imread(gambar)
+@app.route('/api', methods=['POST'])
+def api():
+    res = json.loads(request.data).get('gambar')
+    res = res.split("base64,")
+    gambar = base64.b64decode(res[1])
+    img = Image.open(io.BytesIO(gambar))
 
-    image = img[175:220, 75:640]
+    # image = img[175:220, 75:640]
+    image = img.crop((75,175,640,220))
 
-    d = image_to_string(image)
+    d = pytesseract.image_to_string(image)
 
     for b in d.splitlines():
         b = b.split(' ')
@@ -36,7 +39,8 @@ def index():
 
     if (d == "Transfer Bank" or d == "Transfer Antar"):
 
-        image = img[250:850, 75:640]
+        # image = img[250:850, 75:640]
+        image = img.crop((75,250,640,850))
         roi = [
             [(5, (11 + 23)), (82, 640), 'status', 'text'],
             [(66, (71 + 23)), (200, 640), 'nomor_transaksi', 'text'],
@@ -52,7 +56,7 @@ def index():
         output = dict()
 
         for x, r in enumerate(roi):
-            imgCrop = image[r[0][0]:r[0][1], r[1][0]:r[1][1]]
+            imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
 
             text = pytesseract.image_to_string(imgCrop)
 
@@ -70,7 +74,8 @@ def index():
 
     elif (d == "Pembayaran/Pembelian ShopeePay"):
 
-        image = img[250:850, 75:640]
+        # image = img[250:850, 75:640]
+        image = img.crop((75,250,640,850))
 
         roi = [
             [(10, (16 + 28)), (90, 640), 'status', 'text'],
@@ -88,7 +93,7 @@ def index():
         output = dict()
 
         for x, r in enumerate(roi):
-            imgCrop = image[r[0][0]:r[0][1], r[1][0]:r[1][1]]
+            imgCrop = image.crop((r[1][0],r[0][0],r[1][1],r[0][1]))
 
             text = pytesseract.image_to_string(imgCrop)
 
@@ -105,7 +110,8 @@ def index():
 
     elif (d == "Pembayaran/Pembelian OVO"):
 
-        image = img[250:850, 75:640]
+        # image = img[250:850, 75:640]
+        image = img.crop((75,250,640,850))
 
         roi = [
             [(5, (11 + 23)), (82, 640), 'status', 'text'],
@@ -122,7 +128,7 @@ def index():
         output = dict()
 
         for x, r in enumerate(roi):
-            imgCrop = image[r[0][0]:r[0][1], r[1][0]:r[1][1]]
+            imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
 
             text = pytesseract.image_to_string(imgCrop)
 
@@ -140,7 +146,8 @@ def index():
 
     elif (d == "Pembayaran/Pembelian Go"):
 
-        image = img[250:850, 75:640]
+        # image = img[250:850, 75:640]
+        image = img.crop((75,250,640,850))
 
         roi = [
             [(5, (11 + 23)), (82, 640), 'status', 'text'],
@@ -159,7 +166,7 @@ def index():
         output = dict()
 
         for x, r in enumerate(roi):
-            imgCrop = image[r[0][0]:r[0][1], r[1][0]:r[1][1]]
+            imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
 
             text = pytesseract.image_to_string(imgCrop)
 
@@ -176,7 +183,9 @@ def index():
         return jsonify(output)
 
     elif (d == "Pembayaran/Pembelian DANA"):
-        image = img[250:850, 75:640]
+
+        # image = img[250:850, 75:640]
+        image = img.crop((75,250,640,850))
 
         roi = [
             [(6, (11 + 23)), (82, 640), 'status', 'text'],
@@ -196,7 +205,7 @@ def index():
         output = dict()
 
         for x, r in enumerate(roi):
-            imgCrop = image[r[0][0]:r[0][1], r[1][0]:r[1][1]]
+            imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
 
             text = pytesseract.image_to_string(imgCrop)
 
@@ -218,8 +227,43 @@ def test():
     res = res.split("base64,")
     gambar = base64.b64decode(res[1])
     img = Image.open(io.BytesIO(gambar))
-    text = pytesseract.image_to_string(img)
-    print(text)
-    return jsonify(res[1])
+    image = img.crop((75,175,640,220))
+    d = pytesseract.image_to_string(image)
+    output = dict()
+    for b in d.splitlines():
+        b = b.split(' ')
+
+    d = b[0] + " " + b[1]
+    print(d)
+    if (d == "Transfer Bank" or d == "Transfer Antar"):
+
+        # image = img[250:850, 75:640]
+        image = img.crop((75,250,640,850))
+        roi = [
+            [(5, (11 + 23)), (82, 640), 'status', 'text'],
+            [(66, (71 + 23)), (200, 640), 'nomor_transaksi', 'text'],
+            [(95, (100 + 28)), (206, 640), 'tgl', 'tanggal'],
+            [(156, (161 + 23)), (155, 640), 'nomor_struk', 'text'],
+            [(245, (250 + 28)), (108, 640), 'pengirim', 'text'],
+            [(336, (341 + 23)), (150, 640), 'no_rekening_tujuan', 'text'],
+            [(365, (370 + 24)), (179, 640), 'bank_penerima', 'text'],
+            [(395, (400 + 24)), (120, 640), 'nama_penerima', 'text'],
+            [(455, (460 + 24)), (126, 640), 'jumlah', 'number']
+        ]
+
+        for x, r in enumerate(roi):
+            imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
+
+            text = pytesseract.image_to_string(imgCrop)
+
+            if r[3] == 'text':
+                output[r[2]] = text.replace("\n", "")
+            if r[3] == 'number':
+                output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", ""))
+            if r[3] == 'tanggal':
+                text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
+                output[r[2]] = text
+
+    return jsonify(output)
 
 app.run(debug=True)
