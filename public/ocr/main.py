@@ -26,7 +26,7 @@ def api():
     res = res.split("base64,")
     gambar = base64.b64decode(res[1])
     img = Image.open(io.BytesIO(gambar))
-
+    output = dict()
     # image = img[175:220, 75:640]
     image = img.crop((75,175,640,220))
 
@@ -53,8 +53,6 @@ def api():
             [(455, (460 + 24)), (126, 640), 'jumlah', 'number']
         ]
 
-        output = dict()
-
         for x, r in enumerate(roi):
             imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
 
@@ -78,7 +76,7 @@ def api():
         roi = [
             [(10, (16 + 28)), (90, 640), 'status', 'text'],
             [(79, (84 + 26)), (218, 640), 'no_transaksi', 'text'],
-            [(113, (118 + 26)), (224, 640), 'tgl', 'tanggal'],
+            [(113, (118 + 26)), (222, 640), 'tgl', 'tanggal'],
             [(181, (186 + 26)), (170, 640), 'no_struk', 'text'],
             [(283, (288 + 26)), (168, 640), 'jns_pembelian', 'text'],
             [(317, (322 + 26)), (239, 640), 'no_hp', 'text'],
@@ -87,8 +85,6 @@ def api():
             [(453, (458 + 26)), (160, 640), 'fee', 'number'],
             [(487, (492 + 26)), (220, 640), 'total', 'number']
         ]
-
-        output = dict()
 
         for x, r in enumerate(roi):
             imgCrop = image.crop((r[1][0],r[0][0],r[1][1],r[0][1]))
@@ -100,7 +96,9 @@ def api():
             if r[3] == 'number':
                 output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", "").replace("Rp", ""))
             if r[3] == 'tanggal':
-                text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
+                data = text.replace(";","")
+                text = data.replace("\n","")
+                text = datetime.strptime((text), "%d %b%Y%H:%M:%S")
                 output[r[2]] = text
 
         return jsonify(output)
@@ -121,8 +119,6 @@ def api():
             [(336, (341 + 26)), (165, 640), 'nilai_topup', 'number'],
             [(395, (400 + 24)), (238, 640), 'total_bayar', 'number']
         ]
-
-        output = dict()
 
         for x, r in enumerate(roi):
             imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
@@ -158,8 +154,6 @@ def api():
             [(427, (431 + 24)), (195, 640), 'total_bayar', 'number']
         ]
 
-        output = dict()
-
         for x, r in enumerate(roi):
             imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
 
@@ -182,20 +176,18 @@ def api():
 
         roi = [
             [(6, (11 + 23)), (82, 640), 'status', 'text'],
-            [(66, (71 + 23)), (201, 640), 'no_transaksi', 'text'],
-            [(90, (100 + 28)), (204, 640), 'tgl', 'tanggal'],
-            [(155, (160 + 24)), (154, 640), 'no_struk', 'text'],
+            [(66, (71 + 23)), (201, 560), 'no_transaksi', 'text'],
+            [(90, (100 + 28)), (204, 560), 'tgl', 'tanggal'],
+            [(155, (160 + 24)), (154, 560), 'no_struk', 'text'],
             [(246, (251 + 23)), (157, 640), 'jns_pembelian', 'text'],
             [(276, (281 + 23)), (90, 640), 'no_hp', 'text'],
-            [(306, (311 + 23)), (243, 640), 'nama', 'text'],
+            [(306, (311 + 23)), (243, 560), 'nama', 'text'],
             [(336, (341 + 25)), (170, 640), 'jumlah', 'number'],
             [(396, (401 + 23)), (0, 640), 'order_id', 'text'],
             [(425, (430 + 24)), (175, 640), 'transaksi_id', 'text'],
-            [(456, (461 + 25)), (238, 640), 'total', 'number']
+            [(456, (461 + 25)), (199, 560), 'total', 'number']
 
         ]
-
-        output = dict()
 
         for x, r in enumerate(roi):
             imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
@@ -227,36 +219,35 @@ def test():
 
     d = b[0] + " " + b[1]
     print(d)
-    if (d == "Pembayaran/Pembelian DANA"):
+    if (d == "Transfer Bank" or d == "Transfer Antar"):
 
+        # image = img[250:850, 75:640]
         image = img.crop((75,250,640,850))
-
         roi = [
-            [(6, (11 + 23)), (82, 640), 'status', 'text'],
-            [(66, (71 + 23)), (201, 560), 'no_transaksi', 'text'],
-            [(90, (100 + 28)), (204, 560), 'tgl', 'tanggal'],
-            [(155, (160 + 24)), (154, 560), 'no_struk', 'text'],
-            [(246, (251 + 23)), (157, 640), 'jns_pembelian', 'text'],
-            [(276, (281 + 23)), (90, 640), 'no_hp', 'text'],
-            [(306, (311 + 23)), (243, 560), 'nama', 'text'],
-            [(336, (341 + 25)), (170, 640), 'jumlah', 'number'],
-            [(396, (401 + 23)), (0, 640), 'order_id', 'text'],
-            [(425, (430 + 24)), (175, 640), 'transaksi_id', 'text'],
-            [(456, (461 + 25)), (199, 560), 'total', 'number']
-
+            [(5, (11 + 23)), (82, 640), 'status', 'text'],
+            [(66, (71 + 23)), (200, 640), 'nomor_transaksi', 'text'],
+            [(95, (100 + 28)), (206, 640), 'tgl', 'tanggal'],
+            [(156, (161 + 23)), (155, 640), 'nomor_struk', 'text'],
+            [(245, (250 + 28)), (108, 640), 'pengirim', 'text'],
+            [(336, (341 + 23)), (150, 640), 'no_rekening_tujuan', 'text'],
+            [(365, (370 + 24)), (179, 640), 'bank_penerima', 'text'],
+            [(395, (400 + 24)), (120, 640), 'nama_penerima', 'text'],
+            [(455, (460 + 24)), (126, 640), 'jumlah', 'number']
         ]
 
         for x, r in enumerate(roi):
-            imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
+            imgCrop = image.crop((r[1][0],r[0][0],r[1][1],r[0][1]))
 
             text = pytesseract.image_to_string(imgCrop)
 
             if r[3] == 'text':
                 output[r[2]] = text.replace("\n", "")
             if r[3] == 'number':
-                output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", "").replace("Rp", ""))
+                output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", ""))
             if r[3] == 'tanggal':
-                text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
+                data = text.replace(";","")
+                text = data.replace("\n","")
+                text = datetime.strptime((text), "%d %b%Y%H:%M:%S")
                 output[r[2]] = text
 
     return jsonify(output)
