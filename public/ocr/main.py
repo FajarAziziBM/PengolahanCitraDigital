@@ -63,11 +63,9 @@ def api():
             if r[3] == 'text':
                 output[r[2]] = text.replace("\n", "")
             if r[3] == 'number':
-                output[r[2]] = int(
-                    ((text.replace("\n", "")).replace(".", "")).replace(",", ""))
+                output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", ""))
             if r[3] == 'tanggal':
-                text = datetime.strptime(
-                    (text.replace("\n", "")), "%d %b %Y %H:%M:%S")
+                text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
                 output[r[2]] = text
 
         return jsonify(output)
@@ -100,11 +98,10 @@ def api():
             if r[3] == 'text':
                 output[r[2]] = text.replace("\n", "")
             if r[3] == 'number':
-                output[r[2]] = int(((text.replace("\n", "")).replace(
-                    ".", "")).replace(",", "").replace("Rp", ""))
+                output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", "").replace("Rp", ""))
             if r[3] == 'tanggal':
-                text = datetime.strptime(
-                    (text.replace("\n", "")), "%d %b %Y %H:%M:%S")
+                text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
+                output[r[2]] = text
 
         return jsonify(output)
 
@@ -135,11 +132,9 @@ def api():
             if r[3] == 'text':
                 output[r[2]] = text.replace("\n", "")
             if r[3] == 'number':
-                output[r[2]] = int(((text.replace("\n", "")).replace(
-                    ".", "")).replace(",", "").replace("Rp", ""))
+                output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", "").replace("Rp", ""))
             if r[3] == 'tanggal':
-                text = datetime.strptime(
-                    (text.replace("\n", "")), "%d %b %Y %H:%M:%S")
+                text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
                 output[r[2]] = text
 
         return jsonify(output)
@@ -173,11 +168,9 @@ def api():
             if r[3] == 'text':
                 output[r[2]] = text.replace("\n", "")
             if r[3] == 'number':
-                output[r[2]] = int(((text.replace("\n", "")).replace(
-                    ".", "")).replace(",", "").replace("Rp", ""))
+                output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", "").replace("Rp", ""))
             if r[3] == 'tanggal':
-                text = datetime.strptime(
-                    (text.replace("\n", "")), "%d %b %Y %H:%M:%S")
+                text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
                 output[r[2]] = text
 
         return jsonify(output)
@@ -212,11 +205,10 @@ def api():
             if r[3] == 'text':
                 output[r[2]] = text.replace("\n", "")
             if r[3] == 'number':
-                output[r[2]] = int(((text.replace("\n", "")).replace(
-                    ".", "")).replace(",", "").replace("Rp", ""))
+                output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", "").replace("Rp", ""))
             if r[3] == 'tanggal':
-                text = datetime.strptime(
-                    (text.replace("\n", "")), "%d %b %Y %H:%M:%S")
+                text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
+                output[r[2]] = text
 
         return jsonify(output)
 
