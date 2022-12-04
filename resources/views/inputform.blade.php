@@ -50,7 +50,7 @@
                         oFReader.onload = function(OFREvent) {
                             let data = OFREvent.target.result;
                             $.ajax({
-                                url: "http://127.0.0.1:5000/api",
+                                url: "http://127.0.0.1:5000/getdata",
                                 type: "POST",
                                 data: JSON.stringify({
                                     'gambar': data
@@ -61,7 +61,6 @@
                                     'Content-Type': 'application/json'
                                 },
                                 success: function(result) {
-                                    {{--  imgPreview.src = result  --}}
                                     console.log(result)
                                 }
                             });
