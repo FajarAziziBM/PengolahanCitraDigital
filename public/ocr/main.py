@@ -27,7 +27,7 @@ def api():
     gambar = base64.b64decode(res[1])
     img = Image.open(io.BytesIO(gambar))
     output = dict()
-    
+
     image = img.crop((120,45, 300,150))
 
     a = pytesseract.image_to_string(image)
@@ -208,16 +208,16 @@ def api():
                     output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", "").replace("Rp", ""))
                 if r[3] == 'tanggal':
                     text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
-                    output[r[2]] = text    
+                    output[r[2]] = text
             return jsonify(output)
 
         else :
             output['status'] = "jenis struk tidak tersedia"
             return jsonify(output)
 
-    else : 
+    else :
         output['status'] = "Ini Bukan Struk BSI"
         return jsonify(output)
 
-    
+
 app.run(debug=True)
