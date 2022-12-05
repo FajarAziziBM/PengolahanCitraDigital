@@ -20,6 +20,8 @@
 
                         <div class="card mt-3">
                             <div class="card-body">
+                                <img src="loading/loading.gif" alt="loading" class="visually-hidden" id="loading">
+
                                 <form action="" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3">
@@ -45,6 +47,7 @@
                         const image = document.querySelector('#thumbnail');
                         const imgPreview = document.querySelector('.img-preview');
                         imgPreview.style.display = 'block';
+                        document.querySelector('#loading').classList.remove('visually-hidden');
                         const oFReader = new FileReader();
                         oFReader.readAsDataURL(image.files[0]);
                         oFReader.onload = function(OFREvent) {
@@ -61,6 +64,7 @@
                                     'Content-Type': 'application/json'
                                 },
                                 success: function(result) {
+                                    document.querySelector('#loading').classList.add('visually-hidden');
                                     console.log(result)
                                 }
                             });
