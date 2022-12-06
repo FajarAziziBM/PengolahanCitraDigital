@@ -28,7 +28,7 @@ def api():
     img = Image.open(io.BytesIO(gambar))
     output = dict()
 
-    image = img.crop((120,45, 300,150))
+    image = img.crop((120, 45, 300, 150))
 
     a = pytesseract.image_to_string(image)
 
@@ -36,8 +36,8 @@ def api():
     b['bank'] = a
     b['bank'] = b['bank'].replace('\n', ' ')
 
-    if(b['bank'] == "BANK SYARIAH INDONESIA "):
-        image = img.crop((75,175,640,220))
+    if (b['bank'] == "BANK SYARIAH INDONESIA "):
+        image = img.crop((75, 175, 640, 220))
         d = pytesseract.image_to_string(image)
 
         for b in d.splitlines():
@@ -48,7 +48,7 @@ def api():
         if (d == "Transfer Bank" or d == "Transfer Antar"):
 
             # image = img[250:850, 75:640]
-            image = img.crop((75,250,640,850))
+            image = img.crop((75, 250, 640, 850))
             roi = [
                 [(5, (11 + 23)), (82, 640), 'status', 'text'],
                 [(66, (71 + 23)), (200, 640), 'nomor_transaksi', 'text'],
@@ -62,16 +62,18 @@ def api():
             ]
 
             for x, r in enumerate(roi):
-                imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
+                imgCrop = image.crop((r[1][0], r[0][0], r[1][1], r[0][1]))
 
                 text = pytesseract.image_to_string(imgCrop)
 
                 if r[3] == 'text':
                     output[r[2]] = text.replace("\n", "")
                 if r[3] == 'number':
-                    output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", ""))
+                    output[r[2]] = int(
+                        ((text.replace("\n", "")).replace(".", "")).replace(",", ""))
                 if r[3] == 'tanggal':
-                    text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
+                    text = datetime.strptime(
+                        ((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
                     output[r[2]] = text
 
             return jsonify(output)
@@ -79,7 +81,7 @@ def api():
         elif (d == "Pembayaran/Pembelian ShopeePay"):
 
             # image = img[250:850, 75:640]
-            image = img.crop((75,250,640,850))
+            image = img.crop((75, 250, 640, 850))
 
             roi = [
                 [(10, (16 + 28)), (90, 640), 'status', 'text'],
@@ -95,17 +97,18 @@ def api():
             ]
 
             for x, r in enumerate(roi):
-                imgCrop = image.crop((r[1][0],r[0][0],r[1][1],r[0][1]))
+                imgCrop = image.crop((r[1][0], r[0][0], r[1][1], r[0][1]))
 
                 text = pytesseract.image_to_string(imgCrop)
 
                 if r[3] == 'text':
                     output[r[2]] = text.replace("\n", "")
                 if r[3] == 'number':
-                    output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", "").replace("Rp", ""))
+                    output[r[2]] = int(((text.replace("\n", "")).replace(
+                        ".", "")).replace(",", "").replace("Rp", ""))
                 if r[3] == 'tanggal':
-                    data = text.replace(";","")
-                    text = data.replace("\n","")
+                    data = text.replace(";", "")
+                    text = data.replace("\n", "")
                     text = datetime.strptime((text), "%d %b%Y%H:%M:%S")
                     output[r[2]] = text
 
@@ -114,7 +117,7 @@ def api():
         elif (d == "Pembayaran/Pembelian OVO"):
 
             # image = img[250:850, 75:640]
-            image = img.crop((75,250,640,850))
+            image = img.crop((75, 250, 640, 850))
 
             roi = [
                 [(5, (11 + 23)), (82, 640), 'status', 'text'],
@@ -129,16 +132,18 @@ def api():
             ]
 
             for x, r in enumerate(roi):
-                imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
+                imgCrop = image.crop((r[1][0], r[0][0], r[1][1], r[0][1]))
 
                 text = pytesseract.image_to_string(imgCrop)
 
                 if r[3] == 'text':
                     output[r[2]] = text.replace("\n", "")
                 if r[3] == 'number':
-                    output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", "").replace("Rp", ""))
+                    output[r[2]] = int(((text.replace("\n", "")).replace(
+                        ".", "")).replace(",", "").replace("Rp", ""))
                 if r[3] == 'tanggal':
-                    text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
+                    text = datetime.strptime(
+                        ((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
                     output[r[2]] = text
 
             return jsonify(output)
@@ -146,7 +151,7 @@ def api():
         elif (d == "Pembayaran/Pembelian Go"):
 
             # image = img[250:850, 75:640]
-            image = img.crop((75,250,640,850))
+            image = img.crop((75, 250, 640, 850))
 
             roi = [
                 [(5, (11 + 23)), (82, 640), 'status', 'text'],
@@ -163,16 +168,18 @@ def api():
             ]
 
             for x, r in enumerate(roi):
-                imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
+                imgCrop = image.crop((r[1][0], r[0][0], r[1][1], r[0][1]))
 
                 text = pytesseract.image_to_string(imgCrop)
 
                 if r[3] == 'text':
                     output[r[2]] = text.replace("\n", "")
                 if r[3] == 'number':
-                    output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", "").replace("Rp", ""))
+                    output[r[2]] = int(((text.replace("\n", "")).replace(
+                        ".", "")).replace(",", "").replace("Rp", ""))
                 if r[3] == 'tanggal':
-                    text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
+                    text = datetime.strptime(
+                        ((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
                     output[r[2]] = text
 
             return jsonify(output)
@@ -180,7 +187,7 @@ def api():
         elif (d == "Pembayaran/Pembelian DANA"):
 
             # image = img[250:850, 75:640]
-            image = img.crop((75,250,640,850))
+            image = img.crop((75, 250, 640, 850))
 
             roi = [
                 [(6, (11 + 23)), (82, 640), 'status', 'text'],
@@ -198,26 +205,23 @@ def api():
             ]
 
             for x, r in enumerate(roi):
-                imgCrop = image.crop((r[1][0],r[0][0], r[1][1],r[0][1]))
+                imgCrop = image.crop((r[1][0], r[0][0], r[1][1], r[0][1]))
 
                 text = pytesseract.image_to_string(imgCrop)
 
                 if r[3] == 'text':
                     output[r[2]] = text.replace("\n", "")
                 if r[3] == 'number':
-                    output[r[2]] = int(((text.replace("\n", "")).replace(".", "")).replace(",", "").replace("Rp", ""))
+                    output[r[2]] = int(((text.replace("\n", "")).replace(
+                        ".", "")).replace(",", "").replace("Rp", ""))
                 if r[3] == 'tanggal':
-                    text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
+                    text = datetime.strptime(
+                        ((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
                     output[r[2]] = text
             return jsonify(output)
 
-        else :
-            output['status'] = "jenis struk tidak tersedia"
-            return jsonify(output)
-
-    else :
-        output['status'] = "Ini Bukan Struk BSI"
-        return jsonify(output)
+    else:
+        print("Permintaan ditolak, keluar dari proses!")
 
 
 app.run(debug=True)

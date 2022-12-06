@@ -20,6 +20,8 @@
 
                         <div class="card mt-3">
                             <div class="card-body">
+                                <img src="loading/loading.gif" alt="loading" class="visually-hidden" id="loading">
+
                                 <form action="" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3">
@@ -31,11 +33,13 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Status</label>
-                                        <input type="text" class="form-control" id="status" placeholder="status" name="status">
+                                        <input type="text" class="form-control" id="status" placeholder="status"
+                                            name="status">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlInput1" class="form-label">Nomor Transaksi</label>
-                                        <input type="text" class="form-control" id="no_transaksi" placeholder="no_transaksi" name="no_transaksi">
+                                        <input type="text" class="form-control" id="no_transaksi"
+                                            placeholder="no_transaksi" name="no_transaksi">
                                     </div>
                                     <div class="text-end">
                                         <button type="submit" class="btn btn-primary">Buat Berita</button>
@@ -54,6 +58,7 @@
                         var status = document.querySelector('#status')
                         var no_transaksi = document.querySelector('#no_transaksi')
                         imgPreview.style.display = 'block';
+                        document.querySelector('#loading').classList.remove('visually-hidden');
                         const oFReader = new FileReader();
                         oFReader.readAsDataURL(image.files[0]);
                         oFReader.onload = function(OFREvent) {
