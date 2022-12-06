@@ -215,6 +215,9 @@ def api():
                     output[r[2]] = int(((text.replace("\n", "")).replace(
                         ".", "")).replace(",", "").replace("Rp", ""))
                 if r[3] == 'tanggal':
+
+
+<< << << < HEAD
                     text = datetime.strptime(
                         ((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
                     output[r[2]] = text
@@ -222,8 +225,20 @@ def api():
 
     else:
         print("Permintaan ditolak, keluar dari proses!")
+=======
+                    text = datetime.strptime(((text.replace("\n", "")).replace(" a", "")), "%d %b %Y %H:%M:%S")
+                    output[r[2]] = text
+            return jsonify(output)
 
-    return jsonify(b['bank'])
+        else :
+            output['status'] = "jenis struk tidak tersedia"
+            return jsonify(output)
+
+    else :
+        output['status'] = "Ini Bukan Struk BSI"
+        return jsonify(output)
+>>>>>>> 7b5340d6649c28b6c4162aade8b9840ecc4bc44c
+
 
 
 app.run(debug=True)

@@ -31,7 +31,16 @@
                                             onchange="previewImage()">
                                         <div id="thumbnailHelp" class="form-text">Ekstensi file: JPG, PNG maksimal 2MB</div>
                                     </div>
-
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Status</label>
+                                        <input type="text" class="form-control" id="status" placeholder="status"
+                                            name="status">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label">Nomor Transaksi</label>
+                                        <input type="text" class="form-control" id="no_transaksi"
+                                            placeholder="no_transaksi" name="no_transaksi">
+                                    </div>
                                     <div class="text-end">
                                         <button type="submit" class="btn btn-primary">Buat Berita</button>
                                     </div>
@@ -46,6 +55,8 @@
                     function previewImage() {
                         const image = document.querySelector('#thumbnail');
                         const imgPreview = document.querySelector('.img-preview');
+                        var status = document.querySelector('#status')
+                        var no_transaksi = document.querySelector('#no_transaksi')
                         imgPreview.style.display = 'block';
                         document.querySelector('#loading').classList.remove('visually-hidden');
                         const oFReader = new FileReader();
@@ -64,8 +75,9 @@
                                     'Content-Type': 'application/json'
                                 },
                                 success: function(result) {
-                                    document.querySelector('#loading').classList.add('visually-hidden');
-                                    console.log(result)
+                                    status.value = result['status'];
+                                    no_transaksi.value = result['nomor_transaksi'];
+                                    console.log(result);
                                 }
                             });
                         }
